@@ -12,10 +12,7 @@ export default function Home() {
 	const [username, setUsername] = useState('Maximiliano Carsi Castrejon');
 	const [division, serDivision] = useState ('Division Academica:');
 	const [cargo, setCargo] = useState('Administrador');
-	
-	
 	const auth = getAuth();
-
 	const handleSignOut = async () => {
 		try {
 			await signOut(auth);
@@ -35,8 +32,6 @@ export default function Home() {
           		<Text style={styles.user}>Tipo de usuario:</Text>
        		 </View>
 			  <View style={styles.detail}>
-
-			 
           		<Text style={styles.detailText}>{cargo}</Text>
        		 </View>
 			<View style={styles.detail}>
@@ -59,8 +54,13 @@ export default function Home() {
 				textContentType="email"
 				value={email}
 				onChangeText={(text) => setEmail(text)}
-			
-		  
+				rightIcon={
+					<Icon
+					  type="material-community"
+					  name={"eye-off-outline" }
+					  color="#007bff"
+					/>
+				  }
      		 />
 			<TextInput
         		style={styles.input}
@@ -71,20 +71,14 @@ export default function Home() {
 				textContentType="password"
 				value={password}
 				onChangeText={(text) => setPassword(text)}
-		  
      		 />
-
-			
           	<TouchableOpacity style={styles.btn} onPress={handleSignOut}>
         		<Text style={{fontWeight: 'bold', color: '#fff', fontSize: 18, margin: 10}}>Cerrar sesión</Text>
       		</TouchableOpacity>  
 			  </SafeAreaView>
 		</KeyboardAwareScrollView>
 	);
-
-	
 }
-
 const styles = StyleSheet.create({
 	container: {
 	  flex: 1,

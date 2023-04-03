@@ -1,127 +1,132 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Image, SafeAreaView, TouchableOpacity, StatusBar, Alert } from "react-native";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../../config/utils/firebase'
-const backImage = require("../../../../assets/backImage.png");
-
-export default function Signup({ navigation }) {
-
-  const [email, setEmail] = useState('');
-  const [division, setDivision] = useState('');
-  const  [fullname, setFullname] = useState ('');
-  const [tipo, setTipo] = useState ('');
-
-const onHandleSignup = () => {
-    if (email !== '' && password !== '') {
-  createUserWithEmailAndPassword(auth, email, password)
-        .then(() => console.log('Signup success'))
-        .catch((err) => Alert.alert("Login error", err.message));
-    }
-  };
-  
-  return (
-    <View style={styles.container}>
+import {
+	StyleSheet, Text, View, Image, StatusBar, SafeAreaView, TouchableOpacity,
+  } from "react-native";
+  import React from "react";
+  import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+  import { Card } from "react-native-elements";
+  import { CardDivider } from "@rneui/base/dist/Card/Card.Divider";
+  import { Button, Icon } from "@rneui/themed";
+  const backImage = require("../../../../assets/backImage.png"); 
+export default function NavigationSesion(navigation) {
+	return (
+		<KeyboardAwareScrollView style={styles.container}>
       <Image source={backImage} style={styles.backImage} />
       <View style={styles.whiteSheet} />
       <SafeAreaView style={styles.form}>
-        <Text style={styles.title}>Crear Usuario</Text>
-        <TextInput
-        style={styles.input}
-        placeholder="Ingrese el nombre"
-        autoCapitalize="none"
-        keyboardType="fullname"
-        textContentType="fullname"
-        autoFocus={true}
-        value={fullname}
-        onChangeText={(text) => setFullname(text)}
-      />
-         <TextInput
-        style={styles.input}
-        placeholder="Ingrese un correo"
-        autoCapitalize="none"
-        keyboardType="email-address"
-        textContentType="emailAddress"
-        autoFocus={true}
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Ingrese el tipo de usuario"
-        autoCapitalize="none"
-        keyboardType="tipo"
-        textContentType="tipo"
-        autoFocus={true}
-        value={tipo}
-        onChangeText={(text) => setTipo(text)}
-      />
-         <TextInput
-        style={styles.input}
-        placeholder="Ingrese la División Academica"
-        autoCapitalize="none"
-        keyboardType="division"
-        textContentType="division"
-        autoFocus={true}
-        value={division}
-        onChangeText={(text) => setDivision(text)}
-      />
-      <TouchableOpacity style={styles.button} onPress={onHandleSignup}>
-        <Text style={{fontWeight: 'bold', color: '#fff', fontSize: 18}}>Registrar</Text>
-      </TouchableOpacity>
- 
+        <Text style={styles.title}>Lista de Creaciones </Text>
+        <Card containerStyle={{ borderRadius: 20, marginTop: 45 }}>
+          <Card.Title style={styles.cardText}>Crear Usuarios</Card.Title>
+          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Button
+                buttonStyle={{
+                borderRadius: 10,
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: 0,
+                height: 40,
+                width: 145,
+                backgroundColor: "#01315e",
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              title="Abrir"
+              titleStyle={{ fontWeight: "700" }}/>
+          </View>
+        </Card>
+        <CardDivider />
+        <Card containerStyle={{ marginTop: 1, borderRadius: 20, marginTop: 18 }}>
+          <Card.Title style={styles.cardText}>Crear Aulas</Card.Title>
+          <View
+style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Button
+              buttonStyle={{
+                borderRadius: 10,
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: 0,
+                height: 40,
+                width: 145,
+                backgroundColor: "#01315e",
+              }}
+              title="Abrir"
+              titleStyle={{ fontWeight: "700" }}
+            />
+          </View>
+        </Card>
+        <CardDivider />
+        <Card containerStyle={{ marginTop: 1, borderRadius: 20 }}>
+          <Card.Title style={styles.cardText}>Crear Docencias</Card.Title>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Button
+              buttonStyle={{
+                borderRadius: 10,
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: 0,
+                height: 40,
+                width: 145,
+                backgroundColor: "#01315e",
+              }}
+              title="Abrir"
+              titleStyle={{ fontWeight: "700" }}
+            />
+          </View>
+        </Card>
       </SafeAreaView>
       <StatusBar barStyle="light-content" />
-    </View>
+    </KeyboardAwareScrollView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
   },
   title: {
-    fontSize: 36,
-    fontWeight: '#fff',
-    color: "#fff",
+    fontSize: 30,
+    color: "#ffff",
     alignSelf: "center",
-    marginTop: 30,
+    marginTop: 70,
     paddingBottom: 50,
   },
   input: {
     backgroundColor: "#F6F7FB",
     height: 58,
-    marginBottom: 35,
+    marginBottom: 10,
     fontSize: 16,
     borderRadius: 10,
     padding: 12,
+
+    marginTop: 20,
   },
   backImage: {
     width: "100%",
     height: 340,
     position: "absolute",
     top: 0,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   whiteSheet: {
-    width: '100%',
-    height: '75%',
+    width: "100%",
+    height: "70%",
     position: "absolute",
     bottom: 0,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderTopLeftRadius: 60,
-    borderTopRightRadius: 60
+    borderTopRightRadius: 60,
   },
-  form: {
-    flex: 1,
-    justifyContent: 'center',
-    marginHorizontal: 30,
+  logotype: {
+    width: "100%",
+    height: 150,
+    marginTop: 10,
   },
-  button: {
-    backgroundColor: '#26A69A',
-    height: 58,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
+  detailIcon: {
+    marginRight: 10,
   },
+  cardText:{
+    fontSize:20,
+    color: "#008f71"
+  }
 });
