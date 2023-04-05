@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { FeatherIcon } from "feather-icons";
 import {
   StyleSheet,
   Text,
@@ -19,13 +20,16 @@ import { auth } from "../../../../config/utils/firebase";
 import { Icon } from "react-native-elements";
 const backImage = require("../../../../assets/backImage.png");
 const logoUte = require("../../../../assets/logoUte.png");
+import { useFormik } from "formik";
+import * as yup from "yup";
+import AxiosClient from '../../../../config/axios';
 
-export default function Login() {
   const [error, setError] = useState({ email: "", password: "" });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
+  const [data, setData] =useState([]);
   const login = () => {
     if (email !== "" && password !== "") {
       signInWithEmailAndPassword(auth, email, password)
@@ -33,6 +37,47 @@ export default function Login() {
         .catch((err) => Alert.alert("Login error", err.message));
     }
   };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: yup.object().shape({
+      email: yup.string().required("Campo obligatorio"),
+      password: yup.string().required("Campo obligatorio"),
+    }),
+    onSubmit: async (values) => {
+      try {
+        const response = await AxiosClient({
+          url: "/auth/login",
+          method: "POST",
+          data: JSON.stringify(values),
+        });
+        if (!response.error) {
+          const action = {
+            type: "LO GIN",
+            payload: response.data,
+          };
+          dispatch(action);
+          navigation("/Perfil", { replace: true });
+        } else {
+          throw Error();
+        }
+      } catch (err) {
+        
+      }
+    },
+  });
+
+  useEffect(()=>{
+    AxiosClient.get('http://localhost:8090/api-sirid/auth/login')
+      .then(response =>{
+        setData(response.data);
+      })
+      .catch(error =>{
+        console.log(error);
+      })
+  }, [])
 
   return (
     <KeyboardAwareScrollView style={styles.container}>
@@ -127,14 +172,13 @@ export default function Login() {
                 </Pressable>
               </View>
             </Text>
-            
           </TouchableOpacity>
         </View>
       </SafeAreaView>
       <StatusBar barStyle="light-content" />
     </KeyboardAwareScrollView>
   );
-}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -257,5 +301,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
   },
-  
 });

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 //generar url base
-const SERVER_URL = "http://localhost:8080/api_exam2";
+const SERVER_URL = "http://localhost:8080/api_sirid";
 
 //crear instancia de axios
 const axiosInstance = axios.create({
