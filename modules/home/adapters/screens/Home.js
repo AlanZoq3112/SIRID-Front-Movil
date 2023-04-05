@@ -45,24 +45,7 @@ export default function Home() {
 				<View >
           		<Text style={styles.Text}>Editar Información:</Text>
        		 </View>
-
-			<TextInput
-        		style={styles.input}
-       			placeholder="Ingrese el nombre"
-				autoCapitalize="none"
-				autoCorrect={false}
-				secureTextEntry={true}
-				textContentType="email"
-				value={email}
-				onChangeText={(text) => setEmail(text)}
-				rightIcon={
-					<Icon
-					  type="material-community"
-					  name={"eye-off-outline" }
-					  color="#007bff"
-					/>
-				  }
-     		 />
+     		
 			<TextInput
         		style={styles.input}
        			placeholder="Ingrese la contraseña"
