@@ -1,38 +1,31 @@
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import instance from 'axios';
 
-//generar url base
-<<<<<<< HEAD
-
-const SERVER_URL = "http://localhost:8090/api-sirid";
-=======
-const SERVER_URL = "http://192.168.0.116:8090/api_sirid";
->>>>>>> 0750238f08d3170b901baf535b7822c614b49057
-
-//crear instancia de axios
-const AxiosInstance = axios.create({
-	baseURL: SERVER_URL, //url base
-	timeout: 3000, //si se demora mas de 3 segundos, se cancela la peticion
+const AxiosClient = instance.create({
+    baseURL: 'http://10.0.0.9:8090/api-sirid',
 });
 
-<<<<<<< HEAD
-AxiosInstance.interceptors.request.use(async (config) => {
-	const token = await AsyncStorage.getItem("token");
-	if (token) {
-	config.headers.Authorization = `Bearer ${token}`;
-	}
-	return config;
-	});
+const requestHandler = (request) => {
+    request.headers['Accept'] = 'application/json';
+    request.headers['Content-Type'] = 'application/json';
+   //const session = JSON.parse(AsyncStorage.getItem('user')) || null;
+   //console.log(session);
+   //if (session?.isLogged)
+ //request.headers['Authorization'] = `Bearer ${session.token}`;
+    return request;
+};
 
-=======
-AxiosInstance.interceptors.request.use(async(config) =>{
-	const token = await AsyncStorage.getItem("token");
-	if (token) {
-		config.headers.Authorization = `Bearer ${token}`;
-	}
-	return config;
-})
+const errorResponseHandler = (error) => Promise.reject(error);
 
-//exportar instancia
->>>>>>> 0750238f08d3170b901baf535b7822c614b49057
-export default AxiosInstance;
+const successResponseHandler = (response) => Promise.resolve(response.data);
+
+AxiosClient.interceptors.request.use(
+    (request) => requestHandler(request),
+    (error) => Promise.reject(error)
+);
+
+AxiosClient.interceptors.response.use(
+    (response) => successResponseHandler(response),
+    (error) => errorResponseHandler(error)
+);
+
+export default AxiosClient;
