@@ -15,9 +15,7 @@ export default function Navigation() {
 					tabBarActiveTintColor: "#228B22",
 					tabBarInactiveTintColor: "gray",
 					headerShown: false,
-
-				})}
-				>
+				})}>
 				<Tab.Screen
 					name="login"
 					component={Login}
@@ -27,7 +25,6 @@ export default function Navigation() {
 		</NavigationContainer>
 	);
 }
-
 const screenOptions = (route, color) => {
 	let iconName;
 	switch (route.name) {

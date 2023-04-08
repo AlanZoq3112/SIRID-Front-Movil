@@ -35,6 +35,7 @@ export default function Home() {
 			  <View style={styles.detail}>
           		<Text style={styles.detailText}>{cargo}</Text>
        		 </View>
+			 
 			<View style={styles.detail}>
           		<Text style={styles.user}>{division}</Text>
        		 </View>
