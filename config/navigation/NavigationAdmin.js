@@ -3,6 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PerfilStack from "../stacks/admin/PerfilStack";
 import InicioStack from "../stacks/admin/InicioStack";
+import CreacionesStack from "../stacks/admin/CreacionesStack";
+import IncidenciasStatusStack from "../stacks/admin/IncidenciasStatusStack";
 import { Icon } from "react-native-elements";
 
 const Tab = createBottomTabNavigator();
@@ -28,6 +30,16 @@ export default function NavigationAdmin() {
           component={InicioStack}
           options={{ title: "Crear" }}
         />
+        <Tab.Screen
+          name="Creaciones"
+          component={CreacionesStack}
+          options={{ title: "Creacion" }}
+        />
+        <Tab.Screen
+					name="Incidencias"
+					component={IncidenciasStatusStack}
+					options={{ title: "Incidencias" }}
+				/>
       </Tab.Navigator>
     </NavigationContainer>
   );

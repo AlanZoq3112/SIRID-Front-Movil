@@ -31,7 +31,7 @@ const screenOptions = (route, color) => {
 	let iconName;
 	switch (route.name) {
 		case "Creaciones":
-			iconName = "login";
+			iconName = "clipboard-text-multiple-outline";
 			break;
 	}
 	return (
