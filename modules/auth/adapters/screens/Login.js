@@ -15,6 +15,7 @@ import {
   Pressable,
   size,
 } from "react-native";
+import {Navigate, useNavigate} from 'react-router-dom'
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Icon } from "react-native-elements";
 const backImage = require("../../../../assets/backImage.png");
@@ -26,11 +27,14 @@ import { AxiosInstance } from "axios";
 import axios from "../../../../kernel/http-client.gateway";
 import { AuthContext } from "../../../../kernel/components/authcontext/AuthContext";
 import { validateEmail } from "../../../../kernel/validation";
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
-export default function Login({ navigation, onSubmit }) {
+
+export default function Login({ onSubmit }) {
   const { isAuth, setAuth } = useContext(AuthContext);
   const [show, setShow] = useState(false);
-
+  const { user, dispatch } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(true);
   const payLoad = { email: "", password: "" };
   const [error, setError] = useState(payLoad);
@@ -77,7 +81,7 @@ export default function Login({ navigation, onSubmit }) {
         console.log("entro al token");
         console.log(data);
         const account = await axios.doPost(
-          "http://192.168.0.116:8090/api_sirid/auth/login",
+          "/api-sirid/incidence/",
           {
             email: data.email,
             password: data.password,
@@ -210,6 +214,44 @@ export default function Login({ navigation, onSubmit }) {
       });
     }
   };
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: yup.object().shape({
+      email: yup.string().required('Campo obligatorio'),
+      password: yup.string().required('Campo obligatorio'),
+    }),
+    onSubmit: async (values) => {
+      try {
+        const response = await AxiosClient({
+          url: '/auth/login',
+          method: 'POST',
+          data: JSON.stringify(values),
+        });
+        if (!response.error) {
+          const action = {
+            type: 'LOGIN',
+            payload: response.data,
+          };
+          dispatch(action);
+          navigation('/Perfil', { replace: true });
+        }else{
+          throw Error()
+        }
+      } catch (err) {
+        Alert.fire({
+          title: 'Verificar datos',
+          text: 'Usuario y/o contraseña incorrectos',
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Aceptar',
+        });
+      }
+    },
+  });
+
 
   return (
     <KeyboardAwareScrollView style={styles.container}>
