@@ -1,24 +1,31 @@
 import {
-	StyleSheet, Text, View, Image, StatusBar, SafeAreaView, TouchableOpacity,
-  } from "react-native";
-  import React from "react";
-  import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-  import { Card } from "react-native-elements";
-  import { CardDivider } from "@rneui/base/dist/Card/Card.Divider";
-  import { Button, Icon } from "@rneui/themed";
-  const backImage = require("../../../../../assets/backImage.png"); 
-export default function NavigationSesion(navigation) {
-	return (
-		<KeyboardAwareScrollView style={styles.container}>
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  StatusBar,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
+import React from "react";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Card } from "react-native-elements";
+import { CardDivider } from "@rneui/base/dist/Card/Card.Divider";
+import { Button, Icon } from "@rneui/themed";
+const backImage = require("../../../../../assets/backImage.png");
+export default function NavigationAdmin(navigation) {
+  return (
+    <KeyboardAwareScrollView style={styles.container}>
       <Image source={backImage} style={styles.backImage} />
       <View style={styles.whiteSheet} />
       <SafeAreaView style={styles.form}>
         <Text style={styles.title}>Lista de Creaciones </Text>
         <Card containerStyle={{ borderRadius: 20, marginTop: 45 }}>
           <Card.Title style={styles.cardText}>Crear Usuarios</Card.Title>
-          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}>
             <Button
-                buttonStyle={{
+              buttonStyle={{
                 borderRadius: 10,
                 marginLeft: 10,
                 marginRight: 10,
@@ -26,18 +33,21 @@ export default function NavigationSesion(navigation) {
                 height: 40,
                 width: 145,
                 backgroundColor: "#01315e",
-                justifyContent: 'center',
-                alignItems: 'center',
+                justifyContent: "center",
+                alignItems: "center",
               }}
               title="Abrir"
-              titleStyle={{ fontWeight: "700" }}/>
+              titleStyle={{ fontWeight: "700" }}
+
+            />
           </View>
         </Card>
         <CardDivider />
-        <Card containerStyle={{ marginTop: 1, borderRadius: 20, marginTop: 18 }}>
+        <Card
+          containerStyle={{ marginTop: 1, borderRadius: 20, marginTop: 18 }}>
           <Card.Title style={styles.cardText}>Crear Aulas</Card.Title>
           <View
-style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            style={{ flexDirection: "row", justifyContent: "space-between" }}>
             <Button
               buttonStyle={{
                 borderRadius: 10,
@@ -125,8 +135,8 @@ const styles = StyleSheet.create({
   detailIcon: {
     marginRight: 10,
   },
-  cardText:{
-    fontSize:20,
-    color: "#008f71"
-  }
+  cardText: {
+    fontSize: 20,
+    color: "#008f71",
+  },
 });

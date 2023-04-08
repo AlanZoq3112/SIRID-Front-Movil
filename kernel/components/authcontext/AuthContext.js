@@ -1,5 +1,21 @@
-import { createContext } from "react";
+import {createContext, useState} from 'react'
 
-const AuthContext = createContext();
+/**
+ * @typedef {{isAuth:boolean,setAuth:React.Dispatch<React.SetStateAction<boolean>>}} IAuthContext
+ */
 
-export default AuthContext;
+/**
+ * @type {React.Context<IAuthContext>}
+ */
+
+export const AuthContext = createContext();
+
+
+export function AuthProvider({children}) {
+    const [isAuth, setAuth] = useState(false)
+    return(
+        <AuthContext.Provider value={{isAuth,setAuth}}>
+            {children}
+        </AuthContext.Provider>
+    );
+}
