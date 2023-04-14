@@ -6,6 +6,8 @@ import Docente from "../../modules/docente/adapters/screens/Docente";
 import DocenteActivas from '../../modules/docente/adapters/screens/DocenteActivas';
 import DocentePendientes from '../../modules/docente/adapters/screens/DocentePendientes';
 import DocenteConcluidas from '../../modules/docente/adapters/screens/DocenteConcluidas';
+import Chat from '../../modules/docente/adapters/screens/Chat';
+
 import { Icon } from "react-native-elements";
 
 const Tab = createBottomTabNavigator();
@@ -40,6 +42,13 @@ export default function NavigationDocente() {
                     component={DocenteConcluidas}
                     options={{ title: "concluidas" }}
                 />
+
+<Tab.Screen
+                    name="Chat"
+                    component={Chat}
+                    options={{ title: "chat" }}
+                />
+
 
             </Tab.Navigator>
         </NavigationContainer>

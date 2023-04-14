@@ -1,15 +1,14 @@
 
-
 import { StyleSheet, Text, View, Button, TextInput, Image, SafeAreaView, TouchableOpacity, StatusBar, Alert, Input} from "react-native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { getAuth, signOut } from "firebase/auth";
 import { Icon } from "@rneui/base";
-const backImage = require("../../../../assets/backImage.png");
+const backImage = require("../../../../../assets/backImage.png");
 import React, {useState} from "react";
 export default function Home() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [profilePic, setProfilePic] = useState(require('../../../../assets/images.png'));
+	const [profilePic, setProfilePic] = useState(require('../../../../../assets/images.png'));
 	const [username, setUsername] = useState('Maximiliano Carsi Castrejon');
 	const [division, serDivision] = useState ('Division Academica:');
 	const [cargo, setCargo] = useState('Administrador');
@@ -35,7 +34,6 @@ export default function Home() {
 			  <View style={styles.detail}>
           		<Text style={styles.detailText}>{cargo}</Text>
        		 </View>
-			 
 			<View style={styles.detail}>
           		<Text style={styles.user}>{division}</Text>
        		 </View>
@@ -46,7 +44,24 @@ export default function Home() {
 				<View >
           		<Text style={styles.Text}>Editar Información:</Text>
        		 </View>
-     		
+
+			<TextInput
+        		style={styles.input}
+       			placeholder="Ingrese el nombre"
+				autoCapitalize="none"
+				autoCorrect={false}
+				secureTextEntry={true}
+				textContentType="email"
+				value={email}
+				onChangeText={(text) => setEmail(text)}
+				rightIcon={
+					<Icon
+					  type="material-community"
+					  name={"eye-off-outline" }
+					  color="#007bff"
+					/>
+				  }
+     		 />
 			<TextInput
         		style={styles.input}
        			placeholder="Ingrese la contraseña"

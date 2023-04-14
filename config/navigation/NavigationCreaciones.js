@@ -1,35 +1,37 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Login from "../../modules/auth/adapters/screens/Login";
 import { Icon } from "react-native-elements";
+import CreacionesStack from "../stacks/CreacionesStack";
 
 const Tab = createBottomTabNavigator();
-export default function Navigation() {
-	return (
-		<NavigationContainer>
+
+export default function NavigationCreaciones() {
+  return (
+    <NavigationContainer>
 			<Tab.Navigator
-				initialRouteName="login"
 				screenOptions={({ route }) => ({
 					tabBarIcon: ({ color }) => screenOptions(route, color),
 					tabBarActiveTintColor: "#228B22",
 					tabBarInactiveTintColor: "gray",
 					headerShown: false,
-				})}>
+				})}
+				>
 				<Tab.Screen
-					name="login"
-					component={Login}
-					options={{ title: "Login" }}
+					name="Creaciones"
+					component={CreacionesStack}
+					options={{ title: "Creacion" }}
 				/>
 			</Tab.Navigator>
 		</NavigationContainer>
-	);
+  )
 }
+
 const screenOptions = (route, color) => {
 	let iconName;
 	switch (route.name) {
-		case "login":
-			iconName = "login";
+		case "Creaciones":
+			iconName = "clipboard-text-multiple-outline";
 			break;
 	}
 	return (

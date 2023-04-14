@@ -13,12 +13,4 @@ export default {
 	doDelete(endPoint) {
 		return AxiosClient.delete(endPoint);
 	},
-
-	/*doPostblob(endPoint, payLoad) {
-        return AxiosClient.post(endPoint, payLoad, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
-    }*/
 };
